@@ -1,0 +1,107 @@
+--- TEXT CONTENT ---\n\n--- PAGE 1 ---\n 
+DeepStation 
+grant@deepstation.ai 
+ 
+ 
+William Falcon 
+Founder & CEO of Lightning AI | Creator of PyTorch Lightning 
+“How to Build AI Agents: Lightning AI Workshop” 
+ 
+ 
+ 
+ 
+Description:  
+​💡 Join William Falcon, creator of PyTorch Lightning and CEO of Lightning AI, for a hands-on 
+session on AI agent development. He’ll introduce Lightning AI’s latest tools and demonstrate 
+how they enable you to build lightning-fast, production-ready agents that scale effortlessly. 
+ 
+ 
+ 
+\n--- PAGE 2 ---\n 
+DeepStation 
+grant@deepstation.ai 
+ 
+ 
+ 
+Florida AI Summit 
+ 
+ 
+ 
+●​ Mashruk “Mash” Zahid – AI Operations Transformation Executive Leader, General 
+Motors 
+●​ Rob Greenberg – Senior Product Manager, GenAI, Red Hat AI; Ex-Senior Product 
+Manager, Neural Magic; Ex-Digital Product Manager, Rocketbook; Ex-Technology 
+Consultant, Accenture AI 
+●​ Aashish Amber – Staff AI Engineer, Anthem (Elevance Health) 
+●​ Jen Sheerin – Senior Cloud Solution Architect, Microsoft 
+●​ Tim Hoyt – Principal Product Manager, GE HealthCare 
+●​ Muntaser Syed – GPU Developer Advocate, ex-NVIDIA; Technical Lead, Open 
+Hackathons Team (North & Latin America), ex-NVIDIA; Autonomous and Intelligent 
+Systems Architect, ex-Aeronyde Corp; PhD Candidate (Machine Learning for Embedded 
+Systems), Florida Institute of Technology; Researcher, Florida Institute of Technology 
+\n--- PAGE 3 ---\n 
+DeepStation 
+grant@deepstation.ai 
+ 
+ 
+●​ Max Sky – Investment Partner, ex-a16z 
+●​ Jennetta George – AI/ML Manager, ex-Apple; Global AI Leader, ex-Slalom 
+ 
+ 
+\n--- PAGE 4 ---\n 
+DeepStation 
+grant@deepstation.ai 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+OpenAI Academy Launch Partner 
+ 
+ 
+ 
+ 
+Description: 
+Discover how to leverage the OpenAI API to automatically generate comprehensive Knowledge 
+Graphs from text documents. The session breaks down a powerful yet accessible process that 
+significantly enhances RAG (Retrieval-Augmented Generation) capabilities beyond traditional 
+Vector-based approaches. You'll learn how Knowledge Graphs create contextual connections 
+between information, resulting in more accurate, nuanced AI responses and deeper insights 
+from your data. Perfect for developers and AI practitioners looking to advance their document 
+processing capabilities. 
+ 
+https://academy.openai.com/home/videos/automate-knowledge-graphs 
+\n--- PAGE 5 ---\n 
+DeepStation 
+grant@deepstation.ai 
+ 
+ 
+ 
+Vibe Coding Days by DeepStation 
+ 
+ 
+ 
+​Welcome to Vibe Coding Days - Miami’s most creative tech community where developers, 
+designers, founders, and curious minds come together to build amazing things. Think of it as the 
+perfect blend of creative energy and technical excellence, where good vibes meet great code. 
+Using Vercel’s v0, we’re excited to vibe code applications together and showcase vibe coded 
+products together! 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+\n--- PAGE 6 ---\n 
+DeepStation 
+grant@deepstation.ai 
+ 
+ 
+ 
+Partners & Sponsors 
+ 
+ 
+\n--- IMAGE CONTENT ---\nSaving image to public/img/archives/page1_img0.png\nSaving image to public/img/archives/page1_img1.png\nSaving image to public/img/archives/page1_img2.png\nSaving image to public/img/archives/page1_img3.png\nSaving image to public/img/archives/page1_img4.png\nSaving image to public/img/archives/page2_img0.png\nSaving image to public/img/archives/page2_img1.png\nSaving image to public/img/archives/page2_img2.png\nSaving image to public/img/archives/page2_img3.png\nSaving image to public/img/archives/page2_img4.png\nSaving image to public/img/archives/page3_img0.png\nSaving image to public/img/archives/page3_img1.png\nSaving image to public/img/archives/page4_img0.png\nSaving image to public/img/archives/page4_img1.png\nSaving image to public/img/archives/page5_img0.png\nSaving image to public/img/archives/page5_img1.png\nSaving image to public/img/archives/page5_img2.png\nSaving image to public/img/archives/page5_img3.png\nSaving image to public/img/archives/page5_img4.png\nSaving image to public/img/archives/page6_img0.png\nSaving image to public/img/archives/page6_img1.png\n

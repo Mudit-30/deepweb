@@ -38,7 +38,7 @@ export function Testimonials() {
     const list = [...crewMembers]; // Length 8 + 30 = 38
     const rand = mulberry32(10101); // Magic seed for best spacing
     
-    const result = [];
+    const result: any[] = [];
     // 1 center + 7 ring1 + 12 ring2 + 18 ring3 = 38 Nodes
     const layers = [1, 7, 12, 18];
     // We adjust Radii to be slightly oval to match modern 16:9 screens better
@@ -77,7 +77,7 @@ export function Testimonials() {
     }
 
     // Connect nodes to their closest neighbors to form synpatic edges
-    const lines = [];
+    const lines: any[] = [];
     for (let i = 0; i < result.length; i++) {
       let dists = result.map((n, idx) => ({ idx, d: Math.hypot(n.x - result[i].x, n.y - result[i].y) }));
       dists.sort((a,b) => a.d - b.d);

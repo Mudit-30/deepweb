@@ -5,20 +5,67 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Maximize2 } from "lucide-react";
 
 const archiveItems = [
-  { id: 1, title: "Genesis Hackathon",  date: "March 2026",    color: "#001830", size: "md:col-span-2 md:row-span-2" },
-  { id: 2, title: "Neural Summit",      date: "February 2026", color: "#1886CA", size: "md:col-span-1 md:row-span-1" },
-  { id: 3, title: "Vision Workshop",    date: "January 2026",  color: "#0065A5", size: "md:col-span-1 md:row-span-1" },
-  { id: 4, title: "Robo-Sprint",        date: "December 2025", color: "#1886CA", size: "md:col-span-1 md:row-span-2" },
-  { id: 5, title: "NLP Deep Dive",      date: "November 2025", color: "#001830", size: "md:col-span-1 md:row-span-1" },
-  { id: 6, title: "Open Source Day",    date: "October 2025",  color: "#0065A5", size: "md:col-span-1 md:row-span-1" },
+  { 
+    id: 1, 
+    title: "Building AI Agents Workshop",  
+    date: "William Falcon",    
+    desc: "Join William Falcon, creator of PyTorch Lightning and CEO of Lightning AI, for a hands-on session on AI agent development. He introduced Lightning AI’s latest tools and demonstrated how they enable you to build lightning-fast, production-ready agents that scale effortlessly.",
+    image: "/img/archives/page1_img1.png", 
+    size: "md:col-span-2 md:row-span-2" 
+  },
+  { 
+    id: 2, 
+    title: "Florida AI Summit",      
+    date: "DeepStation Network", 
+    desc: "A massive convergence of AI operations leaders and product managers featuring speakers from General Motors, Red Hat AI, Elevance Health, Microsoft, and GE HealthCare.",
+    image: "/img/archives/page2_img1.png", 
+    size: "md:col-span-1 md:row-span-1" 
+  },
+  { 
+    id: 3, 
+    title: "Vibe Coding Days",    
+    date: "Miami",  
+    desc: "Miami’s most creative tech community where developers, designers, founders, and curious minds come together to build amazing things. A perfect blend of creative energy and technical excellence using Vercel’s v0.",
+    image: "/img/archives/page5_img1.png", 
+    size: "md:col-span-1 md:row-span-1" 
+  },
+  { 
+    id: 4, 
+    title: "OpenAI Academy Partner",        
+    date: "OpenAI", 
+    desc: "DeepStation partnered with OpenAI Academy to automatically generate comprehensive Knowledge Graphs from text documents, significantly enhancing RAG capabilities beyond traditional Vector-based approaches.",
+    image: "/img/archives/page4_img1.png", 
+    size: "md:col-span-1 md:row-span-2" 
+  },
+  { 
+    id: 5, 
+    title: "Vibe Models & Demos",      
+    date: "Hackathon Track", 
+    desc: "Showcasing vibe coded products developed tightly with global developers, demonstrating the power of rapid prototyping.",
+    image: "/img/archives/page5_img2.png", 
+    size: "md:col-span-1 md:row-span-1" 
+  },
+  { 
+    id: 6, 
+    title: "Industry Sponsors",    
+    date: "Global Partners",  
+    desc: "Accelerating the DeepStation ecosystem with investment partners like a16z and former engineers from Apple.",
+    image: "/img/archives/page3_img0.png", 
+    size: "md:col-span-1 md:row-span-1" 
+  },
 ];
 
 export function MissionArchive() {
   const [selectedItem, setSelectedItem] = useState<typeof archiveItems[0] | null>(null);
 
+  // Fallback handler if image fails to load (often PDF rips include tiny transparent spacer images instead of the real photo)
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    e.currentTarget.src = "/img/archives/page1_img0.png"; // Fallback to first image
+  };
+
   return (
-    <section className="py-24 px-6 relative overflow-hidden bg-transparent">
-      <div className="max-w-7xl mx-auto relative z-10">
+    <section className="min-h-screen flex flex-col justify-center px-6 relative overflow-hidden bg-transparent">
+      <div className="max-w-7xl mx-auto relative z-10 w-full py-12">
         <div className="text-center mb-16">
           <motion.span
             initial={{ opacity: 0, y: 10 }}
@@ -48,42 +95,46 @@ export function MissionArchive() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: item.id * 0.1 }}
-              className={`group relative rounded-[2rem] overflow-hidden cursor-pointer glass-card ${item.size}`}
-              style={{ borderColor: "rgba(24,134,202,0.2)" }}
+              className={`group relative rounded-[2rem] overflow-hidden cursor-pointer border border-[#52A9F0]/20 ${item.size} bg-[#020617] z-10`}
               onClick={() => setSelectedItem(item)}
             >
-              {/* Color block */}
-              <div
-                className="absolute inset-0 opacity-80 group-hover:scale-110 transition-transform duration-700"
-                style={{ background: item.color }}
+              {/* Solid black base to completely block background */}
+              <div className="absolute inset-0 bg-[#020617]" />
+
+              {/* Extracted Image Background */}
+              <img 
+                src={item.image} 
+                className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-70 group-hover:scale-110 transition-all duration-700"
+                onError={handleImageError}
+                alt={item.title}
               />
-              {/* Grid overlay */}
+              
+              {/* Color overlay to ensure text is readable */}
               <div
-                className="absolute inset-0 opacity-20"
-                style={{
-                  backgroundImage: "linear-gradient(to right,#80808012 1px,transparent 1px),linear-gradient(to bottom,#80808012 1px,transparent 1px)",
-                  backgroundSize: "24px 24px",
-                }}
+                className="absolute inset-0 opacity-40 bg-black group-hover:opacity-20 transition-opacity duration-500"
               />
+
               {/* Hover overlay */}
               <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center p-6 text-center backdrop-blur-sm"
-                style={{ background: "rgba(24,134,202,0.8)" }}
+                className="absolute inset-x-0 bottom-0 top-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-end p-6 text-center backdrop-blur-md bg-gradient-to-t from-[#020617] to-transparent"
               >
-                <Maximize2 className="w-8 h-8 text-white mb-4 opacity-70" />
-                <h3 className="text-xl md:text-2xl font-bold text-white mb-2" style={{ fontFamily: "var(--font-display)" }}>
+                <Maximize2 className="w-6 h-6 text-white mb-2 opacity-70" />
+                <h3 className="text-xl md:text-2xl font-bold text-white mb-1" style={{ fontFamily: "var(--font-display)" }}>
                   {item.title}
                 </h3>
-                <p className="text-white/80 font-medium tracking-wider uppercase text-xs">
-                  {item.date}
-                </p>
+              </div>
+
+              {/* Static Label bottom left */}
+              <div className="absolute bottom-6 left-6 text-left pointer-events-none group-hover:opacity-0 transition-opacity duration-300">
+                <h3 className="text-xl font-bold text-white" style={{ fontFamily: "var(--font-display)", textShadow: "0 2px 10px rgba(0,0,0,0.8)" }}>{item.title}</h3>
+                <p className="text-xs uppercase tracking-widest text-[#52A9F0] drop-shadow-md font-bold">{item.date}</p>
               </div>
             </motion.div>
           ))}
         </div>
       </div>
 
-      {/* Lightbox */}
+      {/* Lightbox Modal */}
       <AnimatePresence>
         {selectedItem && (
           <motion.div
@@ -91,7 +142,7 @@ export function MissionArchive() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-[100] flex items-center justify-center p-6 md:p-12"
-            style={{ background: "rgba(0,0,0,0.95)", backdropFilter: "blur(20px)" }}
+            style={{ background: "rgba(2, 6, 23, 0.95)", backdropFilter: "blur(20px)" }}
             onClick={() => setSelectedItem(null)}
           >
             <button
@@ -105,21 +156,34 @@ export function MissionArchive() {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="relative w-full max-w-5xl aspect-video rounded-[3rem] overflow-hidden glass-card flex items-center justify-center"
-              style={{ borderColor: "rgba(24,134,202,0.3)" }}
+              className="relative w-full max-w-5xl aspect-auto md:aspect-video rounded-[3rem] overflow-hidden glass-card flex flex-col md:flex-row items-center"
+              style={{ borderColor: "rgba(24,134,202,0.3)", background: "#020617" }}
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="absolute inset-0 opacity-90" style={{ background: selectedItem.color }} />
-              <div className="relative z-10 text-center p-12">
-                <h2 className="text-4xl md:text-6xl font-bold text-white mb-6" style={{ fontFamily: "var(--font-display)" }}>
-                  {selectedItem.title}
-                </h2>
-                <p className="text-xl font-bold tracking-[0.3em] uppercase" style={{ color: "#52A9F0" }}>
+              {/* Modal Image Half */}
+              <div className="w-full md:w-1/2 h-64 md:h-full relative overflow-hidden bg-[#020617]">
+                <img 
+                  src={selectedItem.image} 
+                  onError={handleImageError}
+                  className="w-full h-full object-cover opacity-80"
+                  alt={selectedItem.title} 
+                />
+                <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#020617] to-transparent opacity-80 pointer-events-none" />
+              </div>
+
+              {/* Modal Text Half */}
+              <div className="relative z-10 w-full md:w-1/2 p-8 md:p-12 text-left">
+                <p className="text-sm font-bold tracking-[0.3em] uppercase mb-4" style={{ color: "#52A9F0" }}>
                   {selectedItem.date}
                 </p>
-                <div className="mt-12 w-24 h-1 mx-auto" style={{ background: "linear-gradient(to right, transparent, #1886CA, transparent)" }} />
-                <p className="mt-8 text-slate-400 max-w-2xl mx-auto text-lg">
-                  Archived data from the {selectedItem.title} mission. DeepStation x MSRIT continues to push the boundaries of collective intelligence.
+                <h2 className="text-3xl md:text-5xl font-bold text-white mb-6" style={{ fontFamily: "var(--font-display)" }}>
+                  {selectedItem.title}
+                </h2>
+                
+                <div className="w-16 h-1 mb-8" style={{ background: "linear-gradient(to right, #1886CA, transparent)" }} />
+                
+                <p className="text-slate-300 text-sm md:text-base leading-relaxed">
+                  {selectedItem.desc}
                 </p>
               </div>
             </motion.div>
