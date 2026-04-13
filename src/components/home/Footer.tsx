@@ -44,8 +44,8 @@ export function Footer() {
   ];
 
   return (
-    <footer className="relative border-t overflow-hidden" style={{ background: "#020617", borderColor: "rgba(255,255,255,0.06)" }}>
-      <div className="max-w-7xl mx-auto px-6 pt-24 pb-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16 relative z-10">
+    <footer className="relative border-t overflow-hidden bg-transparent" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
+      <div className="w-full px-4 lg:px-12 mx-auto pt-24 pb-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16 relative z-10">
         {/* Brand */}
         <div className="space-y-6">
           <div className="flex items-center gap-2">
@@ -121,7 +121,7 @@ export function Footer() {
 
       {/* Bottom bar */}
       <div
-        className="max-w-7xl mx-auto px-6 pt-8 flex flex-col md:flex-row justify-between items-center gap-6 relative z-10"
+        className="w-full mx-auto px-4 lg:px-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-6 relative z-10 pb-8"
         style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }}
       >
         <p className="text-slate-500 text-sm font-medium">

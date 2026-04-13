@@ -83,8 +83,8 @@ export function Team() {
     <section id="team" className="relative py-24 px-6 overflow-hidden bg-transparent">
       <div className="blob-sky w-[500px] h-[500px] bottom-0 left-0 opacity-20" />
 
-      <div className="max-w-7xl mx-auto relative z-10">
-        <div ref={titleRef} className="text-center mb-16">
+      <div className="w-full px-4 lg:px-12 mx-auto relative z-10">
+        <div ref={titleRef} className="text-left mb-16">
           <motion.span
             className="badge-orange mb-4 inline-block"
             initial={{ opacity: 0, scale: 0.85 }}

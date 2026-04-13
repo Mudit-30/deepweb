@@ -19,33 +19,8 @@ export function ExploreTicker() {
 
   return (
     <section className="py-24 bg-transparent relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 mb-16 text-center">
-        <motion.span
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-xs font-bold tracking-[0.3em] uppercase block mb-4"
-          style={{ color: "#52A9F0" }}
-        >
-          EXPLORE THE STATION
-        </motion.span>
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-4xl md:text-5xl lg:text-6xl font-bold text-white"
-          style={{ fontFamily: "var(--font-display)" }}
-        >
-          What We <span style={{ color: "#52A9F0" }}>Do</span>
-        </motion.h2>
-      </div>
-
       <div
         className="relative w-full overflow-hidden group"
-        style={{
-          maskImage: "linear-gradient(to right, transparent, black 20%, black 80%, transparent)",
-          WebkitMaskImage: "linear-gradient(to right, transparent, black 20%, black 80%, transparent)",
-        }}
       >
         <div className="flex animate-ticker w-fit group-hover:[animation-play-state:paused] py-4">
           {allItems.map((item, index) => (

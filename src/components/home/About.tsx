@@ -76,7 +76,7 @@ export function About() {
       <div className="blob-orange w-[500px] h-[500px] -top-32 -left-32 opacity-30" />
       <div className="blob-sky   w-[500px] h-[500px] -bottom-20 -right-20 opacity-20" />
 
-      <div className="w-full px-6 md:px-16 lg:px-24 xl:px-32 mx-auto relative z-10">
+      <div className="w-full px-4 lg:px-12 mx-auto relative z-10">
         {/* ── Origin Story ── */}
         <div className="mb-20" ref={titleRef}>
           <div className="flex items-center gap-3 mb-6">
@@ -99,14 +99,13 @@ export function About() {
                   animate={titleInView ? { y: "0%" } : { y: "100%" }}
                   transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  The chapter that&apos;s <br />
-                  <span style={{ color: "#38a9f8" }}>changing everything</span> <br />
-                  at MSRIT.
+                  <span className="text-2xl lg:text-3xl font-black tracking-[0.2em] text-[#ef4444] uppercase mb-4 block" style={{ textShadow: "0 0 20px rgba(239,68,68,0.5)"}}>EXPLORE THE STATION</span>
+                  <span className="text-6xl lg:text-8xl font-black">What We Do.</span>
                 </motion.h2>
               </div>
             </div>
 
-            <div ref={bodyRef} className="space-y-5 pt-2">
+            <div ref={bodyRef} className="space-y-5 pt-2 flex flex-col items-end text-right w-full lg:w-4/5 ml-auto">
               {[
                 "Six months ago, DeepStation Founder & CEO Grant Kurz visited India to officially launch our expansion.",
                 "The vision: to bring the relentless energy of Silicon Valley's AI community directly to the brightest engineering students India has to offer.",
@@ -114,7 +113,7 @@ export function About() {
               ].map((para, i) => (
                 <motion.p
                   key={i}
-                  className="text-slate-400 text-base leading-relaxed"
+                  className="text-slate-400 text-base leading-relaxed max-w-sm"
                   initial={{ opacity: 0, y: 20 }}
                   animate={bodyInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                   transition={{ duration: 0.7, delay: i * 0.14, ease: [0.22, 1, 0.36, 1] }}
@@ -141,13 +140,13 @@ export function About() {
               <span style={{ color: "#38a9f8" }}>Offerings</span>
             </motion.h2>
           </div>
-          <div className="flex flex-col justify-center">
+          <div className="flex flex-col justify-center items-end text-right">
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-              className="text-slate-400 max-w-xl text-lg leading-relaxed"
+              className="text-slate-300 max-w-sm text-xl leading-relaxed"
             >
               DeepStation x MSRIT provides a comprehensive ecosystem for AI enthusiasts to grow, compete, and collaborate.
             </motion.p>

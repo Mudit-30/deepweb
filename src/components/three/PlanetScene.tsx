@@ -95,6 +95,14 @@ const PlanetMaterial = {
 };
 
 // ── Sub-components ─────────────────────────────────────────────
+function PlanetOccluder() {
+  return (
+    <Sphere args={[1.9, 32, 32]}>
+      <meshBasicMaterial color="#020617" depthWrite={true} />
+    </Sphere>
+  );
+}
+
 function PlanetCore() {
   const ref = useRef<THREE.Points>(null);
   const count = 3000;
@@ -255,6 +263,7 @@ export default function PlanetScene({ scrollYProgress }: { scrollYProgress: Moti
       <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
 
       <group>
+        <PlanetOccluder />
         <PlanetCore />
         <PlanetMiddle scrollYProgress={scrollYProgress} />
         <PlanetOuter scrollYProgress={scrollYProgress} />

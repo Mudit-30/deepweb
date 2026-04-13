@@ -51,7 +51,7 @@ export default function Home() {
         />
 
         {/* ── Nebula galaxy background (CSS) ── */}
-        <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        <div className="fixed inset-0 z-[-10] pointer-events-none overflow-hidden">
           <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, #0c1b3d 0%, #020617 100%)" }} />
           {/* Nebula clouds */}
           <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] rounded-full opacity-40"
@@ -63,44 +63,42 @@ export default function Home() {
         </div>
 
         {/* ── 3D Planet Canvas (fixed background) ── */}
-        <div className="fixed inset-0 z-0 pointer-events-none">
+        <div className="fixed inset-0 z-10 pointer-events-none">
           <Canvas camera={{ position: [0, 0, 8], fov: 60 }}>
             <PlanetScene scrollYProgress={scrollYProgress} />
           </Canvas>
         </div>
 
         {/* ── Page content ── */}
-        <div className="relative z-10">
-          {/* 1. Hero */}
-          <Hero />
+        {/* 1. Hero */}
+        <section className="relative z-20 min-h-screen w-full flex flex-col justify-center"><Hero /></section>
 
-          {/* 2. Countdown to next event */}
-          <CountdownTimer />
+        {/* 2. Countdown to next event */}
+        <section className="relative z-20 min-h-screen w-full flex flex-col justify-center"><CountdownTimer /></section>
 
-          {/* 3. Scrolling AI topics ticker */}
-          <ExploreTicker />
+        {/* 3. Scrolling AI topics ticker (Behind Planet) */}
+        <section className="relative z-[5] min-h-screen w-full flex flex-col justify-center"><ExploreTicker /></section>
 
-          {/* 4. About + 3D feature cards + stats */}
-          <About />
+        {/* 4. About + 3D feature cards + stats */}
+        <section className="relative z-20 min-h-screen w-full flex flex-col justify-center"><About /></section>
 
-          {/* 5. Events / Community Impact */}
-          <Events />
+        {/* 5. Events / Community Impact */}
+        <section className="relative z-20 min-h-screen w-full flex flex-col justify-center"><Events /></section>
 
-          {/* 6. Testimonials carousel */}
-          <Testimonials />
+        {/* 6. Testimonials carousel */}
+        <section className="relative z-20 min-h-screen w-full flex flex-col justify-center"><Testimonials /></section>
 
-          {/* 7. Mission Archive bento grid */}
-          <MissionArchive />
+        {/* 7. Mission Archive bento grid */}
+        <section className="relative z-20 min-h-screen w-full flex flex-col justify-center"><MissionArchive /></section>
 
-          {/* 8. Team */}
-          <Team />
+        {/* 8. Team */}
+        <section className="relative z-20 min-h-screen w-full flex flex-col justify-center"><Team /></section>
 
-          {/* 9. CTA — Join Now */}
-          <CTA />
+        {/* 9. CTA — Join Now */}
+        <section className="relative z-20 min-h-screen w-full flex flex-col justify-center"><CTA /></section>
 
-          {/* 10. Footer */}
-          <Footer />
-        </div>
+        {/* 10. Footer */}
+        <section className="relative z-20 w-full flex flex-col justify-end"><Footer /></section>
       </main>
     </>
   );

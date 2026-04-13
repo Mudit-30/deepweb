@@ -51,18 +51,7 @@ export function Hero() {
       >
         {/* Left Column: Text */}
         <div className="lg:w-[45%] w-full">
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 1.8, ease: "easeOut" }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8 pointer-events-auto"
-          >
-            <Sparkles className="w-4 h-4" style={{ color: "#38a9f8" }} />
-            <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: "#bae0fd" }}>
-              India&apos;s Leading AI Community · MSRIT Chapter
-            </span>
-          </motion.div>
+
 
           {/* Headline */}
           <h1
@@ -71,30 +60,18 @@ export function Hero() {
             style={{ fontFamily: "var(--font-display)" }}
           >
             <div className="text-white" style={{ textShadow: "0 0 30px rgba(255,255,255,0.2)" }}>
-              Where MSRIT
-            </div>
-            <div
-              style={{
-                background: "linear-gradient(to right, #52A9F0, #1886CA, #0065A5)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-                textShadow: "none",
-                filter: "drop-shadow(0 0 30px rgba(24,134,202,0.5))",
-              }}
-            >
-              Meets AI.
+              DeepStation<span style={{ color: "#ef4444" }}>RIT</span>
             </div>
           </h1>
 
           </div>
 
         {/* Right Column: Descriptions & Actions */}
-        <div className="lg:w-[40%] w-full flex flex-col justify-center relative mt-16 lg:mt-0 pointer-events-auto">
+        <div className="lg:w-[35%] w-full flex flex-col justify-center items-end relative mt-16 lg:mt-0 pointer-events-auto text-right lg:pr-12">
           {/* Subtext */}
           <p
             ref={subtitleRef}
-            className="text-lg md:text-xl text-slate-300 max-w-lg mb-12 leading-relaxed"
+            className="text-lg md:text-xl text-slate-300 mb-12 leading-relaxed"
           >
             The official autonomous college chapter of the global DeepStation community.
             Join elite hackathons, expert-led sessions, and hands-on workshops shaping
@@ -104,7 +81,7 @@ export function Hero() {
           {/* Buttons */}
           <div
             ref={buttonsRef}
-            className="flex flex-col sm:flex-row items-start sm:items-center justify-start gap-6 pointer-events-auto"
+            className="flex flex-col sm:flex-row items-center justify-end gap-6 pointer-events-auto w-full"
           >
             <a
               href="#events"

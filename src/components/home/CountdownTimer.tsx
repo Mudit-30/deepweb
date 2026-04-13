@@ -60,8 +60,7 @@ export function CountdownTimer() {
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-xs font-bold tracking-[0.3em] uppercase block mb-8"
-          style={{ color: "#52A9F0" }}
+          className="text-xs font-bold tracking-[0.3em] uppercase block mb-8 text-white"
         >
           Next Mission Launches In
         </motion.span>
@@ -81,13 +80,17 @@ export function CountdownTimer() {
                 style={{ borderColor: "rgba(24,134,202,0.3)", boxShadow: "0 0 30px rgba(24,134,202,0.2)" }}
               >
                 <span
-                  className="text-4xl md:text-6xl font-bold text-white group-hover:transition-colors duration-500"
-                  style={{ fontFamily: "var(--font-display)", textShadow: "0 0 15px rgba(255,255,255,0.3)" }}
+                  className="text-4xl md:text-6xl font-bold group-hover:transition-colors duration-500"
+                  style={{ 
+                    fontFamily: "var(--font-display)", 
+                    color: unit.label === "Seconds" ? "#ef4444" : "white",
+                    textShadow: unit.label === "Seconds" ? "0 0 15px rgba(239,68,68,0.3)" : "0 0 15px rgba(255,255,255,0.3)" 
+                  }}
                 >
                   {unit.value.toString().padStart(2, "0")}
                 </span>
               </div>
-              <span className="text-slate-500 text-sm font-bold uppercase tracking-widest">
+              <span className="text-white text-sm font-bold uppercase tracking-widest">
                 {unit.label}
               </span>
             </motion.div>
