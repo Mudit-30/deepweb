@@ -1,65 +1,107 @@
-import Image from "next/image";
+"use client";
+
+import dynamic from "next/dynamic";
+import { Canvas } from "@react-three/fiber";
+import { motion, useScroll, useSpring, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+
+// ── Static imports ─────────────────────────────────────────────
+import { Preloader }       from "@/components/home/Preloader";
+import { Hero }            from "@/components/home/Hero";
+import { CountdownTimer }  from "@/components/home/CountdownTimer";
+import { ExploreTicker }   from "@/components/home/ExploreTicker";
+import { About }           from "@/components/home/About";
+import { Events }          from "@/components/home/Events";
+import { Testimonials }    from "@/components/home/Testimonials";
+import { MissionArchive }  from "@/components/home/MissionArchive";
+import { Team }            from "@/components/home/Team";
+import { CTA }             from "@/components/home/CTA";
+import { Footer }          from "@/components/home/Footer";
+
+// ── Dynamic import: Three.js scene must NOT run on server ──────
+const PlanetScene = dynamic(() => import("@/components/three/PlanetScene"), {
+  ssr: false,
+  loading: () => null,
+});
 
 export default function Home() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <>
+      {/* ── Preloader ─── */}
+      <AnimatePresence mode="wait">
+        {isLoading && (
+          <Preloader key="preloader" onComplete={() => setIsLoading(false)} />
+        )}
+      </AnimatePresence>
+
+      <main className="relative min-h-screen bg-[#020617] text-slate-200 overflow-x-hidden">
+        {/* ── Scroll progress bar ── */}
+        <motion.div
+          className="fixed top-0 left-0 right-0 h-1 origin-left z-[60]"
+          style={{ scaleX, background: "#0e8ce4" }}
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+
+        {/* ── Nebula galaxy background (CSS) ── */}
+        <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+          <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, #0c1b3d 0%, #020617 100%)" }} />
+          {/* Nebula clouds */}
+          <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] rounded-full opacity-40"
+            style={{ background: "rgba(37,99,235,0.1)", filter: "blur(150px)", animation: "pulse 4s ease-in-out infinite" }} />
+          <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] rounded-full opacity-40"
+            style={{ background: "rgba(99,102,241,0.1)", filter: "blur(150px)", animation: "pulse 4s ease-in-out infinite", animationDelay: "2s" }} />
+          <div className="absolute top-[20%] right-[10%] w-[40%] h-[40%] rounded-full opacity-30"
+            style={{ background: "rgba(14,140,228,0.05)", filter: "blur(120px)", animation: "pulse 4s ease-in-out infinite", animationDelay: "4s" }} />
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        {/* ── 3D Planet Canvas (fixed background) ── */}
+        <div className="fixed inset-0 z-0 pointer-events-none">
+          <Canvas camera={{ position: [0, 0, 8], fov: 60 }}>
+            <PlanetScene scrollYProgress={scrollYProgress} />
+          </Canvas>
+        </div>
+
+        {/* ── Page content ── */}
+        <div className="relative z-10">
+          {/* 1. Hero */}
+          <Hero />
+
+          {/* 2. Countdown to next event */}
+          <CountdownTimer />
+
+          {/* 3. Scrolling AI topics ticker */}
+          <ExploreTicker />
+
+          {/* 4. About + 3D feature cards + stats */}
+          <About />
+
+          {/* 5. Events / Community Impact */}
+          <Events />
+
+          {/* 6. Testimonials carousel */}
+          <Testimonials />
+
+          {/* 7. Mission Archive bento grid */}
+          <MissionArchive />
+
+          {/* 8. Team */}
+          <Team />
+
+          {/* 9. CTA — Join Now */}
+          <CTA />
+
+          {/* 10. Footer */}
+          <Footer />
         </div>
       </main>
-    </div>
+    </>
   );
 }
