@@ -152,43 +152,48 @@ export function About() {
             </motion.p>
           </div>
         </div>
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 perspective-1000"
-        >
-          {features.map((feature, index) => (
-            <motion.div
-              key={feature.title}
-              id={feature.id}
-              variants={itemVariants}
-              ref={(el) => { if (el) cardsRef.current[index] = el; }}
-              className="group relative p-8 rounded-[2rem] glass-card hover:bg-white/10 transition-colors duration-500 overflow-hidden transform-style-3d"
-            >
-              <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div
-                className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-lg relative z-10 translate-z-12"
-                style={{ background: feature.color }}
+        <div className="relative w-full overflow-hidden group">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="flex animate-ticker w-fit group-hover:[animation-play-state:paused] py-4"
+          >
+            {[...features, ...features].map((feature, index) => (
+              <motion.div
+                key={`${feature.title}-${index}`}
+                variants={itemVariants}
+                className="flex-shrink-0 px-4"
+                style={{ width: "350px" }}
               >
-                <feature.icon className="w-7 h-7 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-white relative z-10 translate-z-8" style={{ fontFamily: "var(--font-display)" }}>
-                {feature.title}
-              </h3>
-              <p className="text-slate-400 mb-8 leading-relaxed relative z-10 translate-z-4">
-                {feature.description}
-              </p>
-              <button
-                className="flex items-center gap-2 font-bold group-hover:gap-3 transition-all relative z-10 translate-z-8"
-                style={{ color: "#38a9f8" }}
-              >
-                Learn More <ArrowRight className="w-4 h-4" />
-              </button>
-            </motion.div>
-          ))}
-        </motion.div>
+                <div
+                  className="group/card relative p-8 rounded-[2rem] glass-card hover:bg-white/10 transition-colors duration-500 overflow-hidden h-full flex flex-col"
+                >
+                  <div className="absolute inset-0 bg-white/10 opacity-0 group-hover/card:opacity-100 transition-opacity duration-500" />
+                  <div
+                    className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-lg relative z-10"
+                    style={{ background: feature.color }}
+                  >
+                    <feature.icon className="w-7 h-7 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-4 text-white relative z-10" style={{ fontFamily: "var(--font-display)" }}>
+                    {feature.title}
+                  </h3>
+                  <p className="text-slate-400 mb-8 leading-relaxed relative z-10 flex-grow">
+                    {feature.description}
+                  </p>
+                  <button
+                    className="flex items-center gap-2 font-bold group-hover/card:gap-3 transition-all relative z-10 mt-auto"
+                    style={{ color: "#38a9f8" }}
+                  >
+                    Learn More <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
 
       </div>
 

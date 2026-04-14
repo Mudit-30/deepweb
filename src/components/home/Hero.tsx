@@ -47,7 +47,7 @@ export function Hero() {
     >
       <motion.div
         style={{ opacity, y: textY }}
-        className="relative z-10 w-full px-6 md:px-16 lg:px-24 xl:px-32 text-left pointer-events-none flex flex-col lg:flex-row lg:justify-between items-center flex-wrap"
+        className="relative z-10 w-full px-4 md:px-6 lg:px-8 xl:px-12 text-left pointer-events-none flex flex-col lg:flex-row lg:justify-between items-center flex-wrap"
       >
         {/* Left Column: Text */}
         <div className="lg:w-[45%] w-full">

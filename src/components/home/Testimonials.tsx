@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, ExternalLink } from "lucide-react";
 
 const coreMembers = [
-  "Harshit Agrawal", "Anaghaa Patil", "Mudit Saxena", "Amogh Shastry",
+  "Grant Kurz", "Harshit Agrawal", "Anaghaa Patil", "Mudit Saxena", "Amogh Shastry",
   "Kartikey mani Tripathi", "Siddharth Priyatam", "Nikita Hedge", "Shyreyas"
 ];
 
@@ -20,6 +20,28 @@ const generalMembers = [
 ];
 
 const crewMembers = [...coreMembers, ...generalMembers];
+
+const imageMap: Record<string, string> = {
+  "Grant Kurz": "/img/crew/grant kurz.jpeg",
+  "Akash S": "/img/crew/Akash S.jpeg",
+  "Anaghaa Patil": "/img/crew/Anaghaa.jpeg",
+  "Harshit Agrawal": "/img/crew/Harshit.jpeg",
+  "Mudit Saxena": "/img/crew/Mudit.jpeg",
+  "Mukul Prasad": "/img/crew/Mukul.jpeg",
+  "Niranjan Nishore": "/img/crew/Niranjan Nichore.jpeg",
+  "Rohan N Karadigudd": "/img/crew/Rohan.jpeg",
+  "Akash Biswas": "/img/crew/akash biswas.jpeg",
+  "Amogh Shastry": "/img/crew/amogh.jpeg",
+  "Ishita Agarwal": "/img/crew/ishita.jpeg",
+  "Nikita Hedge": "/img/crew/nikita ravindra.jpeg",
+  "Nysa Lakhotia": "/img/crew/nysa.jpeg",
+  "Siddharth Priyatam": "/img/crew/siddharth.jpeg",
+  "Sinchana": "/img/crew/sinchana.jpeg",
+  "Vanshika": "/img/crew/vanshika.jpeg",
+  "Vibodharya Jampale Sathish": "/img/crew/vibodharya.jpeg",
+  "Vigyanth": "/img/crew/vigyanth.jpeg",
+  "Yashmita": "/img/crew/yashmita Sudhir.jpeg"
+};
 
 // Seeded random for deterministic organic layouts
 function mulberry32(a: number) {
@@ -41,9 +63,9 @@ export function Testimonials() {
     const result: any[] = [];
     // 1 center + 7 ring1 + 12 ring2 + 18 ring3 = 38 Nodes
     const layers = [1, 7, 12, 18];
-    // We adjust Radii to be slightly oval to match modern 16:9 screens better
-    const radiiX = [0, 15, 30, 46]; 
-    const radiiY = [0, 18, 35, 46];
+    // We adjust Radii to be strictly systematic and spread out to avoid clutter
+    const radiiX = [0, 20, 36, 48]; 
+    const radiiY = [0, 24, 40, 48];
 
     let currentIdx = 0;
 
@@ -55,11 +77,11 @@ export function Testimonials() {
         if (currentIdx >= list.length) break;
         
         const angle = (i / count) * Math.PI * 2;
-        const offset = ring * 0.4 + (rand() * 0.3); // Organic spiral offset
-        const variance = ring === 0 ? 0 : rand() * 4; // Distance deviation
+        // Perfectly systematic offset mathematically distributing the rings
+        const offset = ring * (Math.PI / count); 
         
-        const x = 50 + (rx + variance) * Math.cos(angle + offset);
-        const y = 50 + (ry + variance) * Math.sin(angle + offset);
+        const x = 50 + rx * Math.cos(angle + offset);
+        const y = 50 + ry * Math.sin(angle + offset);
         
         const name = list[currentIdx];
         const words = name.split(" ");
@@ -69,6 +91,7 @@ export function Testimonials() {
            id: currentIdx,
            name,
            initials: initials.toUpperCase(),
+           image: imageMap[name] || null,
            x, y,
            isBig: currentIdx < 8 // first 8 are marked Core/Big
         });
@@ -138,15 +161,19 @@ export function Testimonials() {
           <motion.div
             key={node.id}
             onClick={() => setActiveNode(node)}
-            initial={{ scale: 0, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
+            initial={{ scale: 0, opacity: 0, x: "-50%", y: "-50%" }}
+            whileInView={{ scale: 1, opacity: 1, x: "-50%", y: "-50%" }}
             viewport={{ once: true }}
             transition={{ delay: node.id * 0.02, type: "spring", stiffness: 200, damping: 15 }}
-            className={`absolute -translate-x-1/2 -translate-y-1/2 rounded-full flex items-center justify-center cursor-pointer shadow-lg hover:z-20 border border-[#52A9F0]/60 transition-colors ${node.isBig ? "w-14 h-14 text-sm bg-[#1886CA] text-white font-bold" : "w-8 h-8 text-[10px] bg-[#020617] text-[#52A9F0] hover:bg-[#1886CA] hover:text-white"}`}
-            style={{ left: `${node.x}%`, top: `${node.y}%`, boxShadow: node.isBig ? "0 0 25px rgba(24,134,202,0.6)" : "none" }}
-            whileHover={{ scale: 1.3, boxShadow: "0 0 30px rgba(82,169,240,0.8)" }}
+            className={`absolute rounded-full flex items-center justify-center cursor-pointer shadow-lg border border-[#52A9F0]/60 transition-colors ${node.isBig ? "w-20 h-20 md:w-24 md:h-24 text-sm bg-[#1886CA] text-white font-bold" : "w-12 h-12 md:w-16 md:h-16 text-[10px] md:text-sm bg-[#020617] text-[#52A9F0] hover:bg-[#1886CA] hover:text-white"}`}
+            style={{ left: `${node.x}%`, top: `${node.y}%`, boxShadow: node.isBig ? "0 0 25px rgba(24,134,202,0.6)" : "none", zIndex: node.isBig ? 10 : 1 }}
+            whileHover={{ scale: 1.15, zIndex: 50, boxShadow: "0 0 40px rgba(82,169,240,1)" }}
           >
-             {node.initials}
+             {node.image ? (
+                <img src={node.image} alt={node.name} className="w-full h-full object-cover rounded-full" />
+             ) : (
+                node.initials
+             )}
           </motion.div>
         ))}
       </div>
@@ -155,36 +182,64 @@ export function Testimonials() {
       <AnimatePresence>
          {activeNode && (
            <motion.div
-             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-             className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
-             onClick={() => setActiveNode(null)}
-           >
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-12 bg-[#020617]/80 backdrop-blur-md"
+              onClick={() => setActiveNode(null)}
+            >
              <motion.div
-               initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }}
-               className="glass-card max-w-sm w-full p-8 rounded-3xl relative border border-[#52A9F0]/30 shadow-2xl"
+               initial={{ scale: 0.95, opacity: 0 }}
+               animate={{ scale: 1, opacity: 1 }}
+               exit={{ scale: 0.95, opacity: 0 }}
+               className="relative w-full max-w-4xl aspect-auto md:h-[400px] rounded-[2rem] overflow-hidden glass-card flex flex-col md:flex-row items-stretch shadow-[0_0_50px_rgba(24,134,202,0.15)]"
+               style={{ borderColor: "rgba(24,134,202,0.3)", background: "#020617" }}
                onClick={(e) => e.stopPropagation()}
-               style={{ background: "#020617" }}
              >
-               <button onClick={() => setActiveNode(null)} className="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors">
-                 <X size={20} />
-               </button>
-               <div className="w-16 h-16 rounded-full flex items-center justify-center text-xl font-bold bg-[#1886CA] text-white mb-6 shadow-lg shadow-[#1886CA]/50">
-                 {activeNode.initials}
+               {/* Modal Image Half */}
+               <div className="w-full md:w-1/2 h-64 md:h-full relative overflow-hidden bg-[#020617] border-b md:border-b-0 md:border-r border-[#52A9F0]/20">
+                 {activeNode.image ? (
+                   <img 
+                     src={activeNode.image} 
+                     className="w-full h-full object-cover opacity-90"
+                     alt={activeNode.name} 
+                   />
+                 ) : (
+                   <div className="w-full h-full flex items-center justify-center text-6xl font-bold bg-[#1886CA] text-white">
+                     {activeNode.initials}
+                   </div>
+                 )}
+                 <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#020617] to-transparent opacity-60 pointer-events-none" />
                </div>
-               <h3 className="text-2xl font-bold text-white mb-1" style={{ fontFamily: "var(--font-display)" }}>{activeNode.name}</h3>
-               <p className="text-xs uppercase tracking-widest text-[#52A9F0] font-bold mb-6">{activeNode.isBig ? "Core Node / Architect" : "Active Member"}</p>
-               
-               <p className="text-slate-300 text-sm mb-8 leading-relaxed">
-                 {activeNode.isBig 
-                   ? "Driving the neural network of our community forward. Specialized in computational architectures and accelerating DeepStation's core infrastructure."
-                   : "Vital node within the DeepStation mesh. Focused on algorithmic exploration and integrating advanced systems into real-world applications."}
-               </p>
 
-               <button className="flex w-full items-center justify-center gap-2 bg-[#1886CA] hover:bg-[#52A9F0] active:scale-95 text-white py-3 rounded-full font-bold transition-all">
-                 Connect <ExternalLink size={16} />
-               </button>
+               {/* Modal Text Half */}
+               <div className="relative z-10 w-full md:w-1/2 p-8 md:p-10 flex flex-col justify-center text-left">
+                 <button onClick={() => setActiveNode(null)} className="absolute top-6 right-6 text-slate-400 hover:text-white hover:rotate-90 transition-all duration-300">
+                   <X size={24} />
+                 </button>
+                 
+                 <p className="text-xs font-bold tracking-[0.2em] uppercase mb-2" style={{ color: "#52A9F0" }}>
+                   {activeNode.isBig ? "Core Architect" : "DeepStation Operator"}
+                 </p>
+                 <h2 className="text-3xl md:text-4xl font-bold text-white mb-6" style={{ fontFamily: "var(--font-display)" }}>
+                   {activeNode.name}
+                 </h2>
+                 
+                 <div className="w-12 h-1 mb-6" style={{ background: "linear-gradient(to right, #1886CA, transparent)" }} />
+                 
+                 <p className="text-slate-300 text-sm leading-relaxed mb-8 flex-grow">
+                   {activeNode.isBig 
+                     ? "Driving the neural network of our community forward. Specialized in computational architectures and accelerating DeepStation's core infrastructure."
+                     : "Vital node within the DeepStation mesh. Focused on algorithmic exploration and integrating advanced systems into real-world applications."}
+                 </p>
+
+                 <a 
+                   href="#" 
+                   className="inline-flex w-fit items-center justify-center gap-2 bg-transparent border border-[#1886CA] hover:bg-[#1886CA] active:scale-95 text-white px-6 py-3 rounded-full font-bold transition-all text-sm hover:shadow-[0_0_20px_rgba(24,134,202,0.4)]"
+                 >
+                   Connect on LinkedIn <ExternalLink size={16} />
+                 </a>
+               </div>
              </motion.div>
-           </motion.div>
+            </motion.div>
          )}
       </AnimatePresence>
     </section>
