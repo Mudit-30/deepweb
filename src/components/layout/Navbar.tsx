@@ -5,9 +5,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Cpu, Globe, Calendar, Users } from "lucide-react";
 
 const links = [
-  { label: "Hackathons", href: "#hackathons", icon: Cpu   },
-  { label: "Events",     href: "#events",     icon: Globe  },
-  { label: "Workshops",  href: "#workshops",  icon: Calendar },
+  { label: "About",      href: "#about",      icon: Globe  },
+  { label: "Showcase",   href: "#events",     icon: Cpu    },
+  { label: "Archive",    href: "#archive",    icon: Calendar },
   { label: "Team",       href: "#team",       icon: Users  },
 ];
 
@@ -39,7 +39,7 @@ export function Navbar() {
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* Logo */}
           <motion.a
-            href="#"
+            href="#hero"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             className="flex items-center gap-2"
@@ -98,8 +98,8 @@ export function Navbar() {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="absolute top-full left-0 right-0 glass p-6 flex flex-col gap-4 md:hidden"
-              style={{ borderTop: "none" }}
+              className="absolute top-full left-0 right-0 bg-[#020617]/95 backdrop-blur-xl p-6 flex flex-col gap-4 md:hidden border-t border-white/5"
+              style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}
             >
               {links.map((link) => (
                 <a

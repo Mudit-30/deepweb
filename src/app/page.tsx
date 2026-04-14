@@ -12,7 +12,6 @@ import { CountdownTimer }  from "@/components/home/CountdownTimer";
 import { ExploreTicker }   from "@/components/home/ExploreTicker";
 import { About }           from "@/components/home/About";
 import { Events }          from "@/components/home/Events";
-import { Testimonials }    from "@/components/home/Testimonials";
 import { MissionArchive }  from "@/components/home/MissionArchive";
 import { Team }            from "@/components/home/Team";
 import { CTA }             from "@/components/home/CTA";
@@ -22,6 +21,10 @@ import { Footer }          from "@/components/home/Footer";
 const PlanetScene = dynamic(() => import("@/components/three/PlanetScene"), {
   ssr: false,
   loading: () => null,
+});
+
+const Testimonials = dynamic(() => import("@/components/home/Testimonials").then(m => m.Testimonials), {
+  ssr: false,
 });
 
 export default function Home() {
@@ -42,6 +45,7 @@ export default function Home() {
           <Preloader key="preloader" onComplete={() => setIsLoading(false)} />
         )}
       </AnimatePresence>
+      
 
       <main className="relative min-h-screen bg-[#020617] text-slate-200 overflow-x-hidden">
         {/* ── Scroll progress bar ── */}

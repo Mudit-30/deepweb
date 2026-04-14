@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useMemo } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { Sphere, Torus, Float, Stars, Icosahedron, Box } from "@react-three/drei";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
@@ -106,19 +106,22 @@ function PlanetOccluder() {
 function PlanetCore() {
   const ref = useRef<THREE.Points>(null);
   const count = 3000;
-  const positions = new Float32Array(count * 3);
-  for (let i = 0; i < count; i++) {
-    const r = 1.8 * Math.cbrt(Math.random());
-    const theta = Math.random() * 2 * Math.PI;
-    const phi = Math.acos(2 * Math.random() - 1);
-    positions[i * 3]     = r * Math.sin(phi) * Math.cos(theta);
-    positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
-    positions[i * 3 + 2] = r * Math.cos(phi);
-  }
+  const positions = useMemo(() => {
+    const arr = new Float32Array(count * 3);
+    for (let i = 0; i < count; i++) {
+      const r = 1.8 * Math.cbrt(Math.random());
+      const theta = Math.random() * 2 * Math.PI;
+      const phi = Math.acos(2 * Math.random() - 1);
+      arr[i * 3]     = r * Math.sin(phi) * Math.cos(theta);
+      arr[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+      arr[i * 3 + 2] = r * Math.cos(phi);
+    }
+    return arr;
+  }, []);
   useFrame((state) => {
     if (ref.current) {
-      ref.current.rotation.y = state.clock.elapsedTime * 0.05;
-      ref.current.rotation.x = state.clock.elapsedTime * 0.02;
+      ref.current.rotation.y = state.elapsed * 0.05;
+      ref.current.rotation.x = state.elapsed * 0.02;
     }
   });
   return (
@@ -135,7 +138,7 @@ function PlanetMiddle({ scrollYProgress }: { scrollYProgress: MotionValue<number
   const materialRef = useRef<THREE.ShaderMaterial>(null);
   useFrame((state) => {
     if (materialRef.current) {
-      materialRef.current.uniforms.time.value = state.clock.elapsedTime;
+      materialRef.current.uniforms.time.value = state.elapsed;
       const scroll = scrollYProgress.get();
       const intensity = 1 + scroll * 2;
       materialRef.current.uniforms.glowColor.value.setRGB(
@@ -164,8 +167,8 @@ function PlanetOuter({ scrollYProgress }: { scrollYProgress: MotionValue<number>
   const ref = useRef<THREE.Mesh>(null);
   useFrame((state) => {
     if (ref.current) {
-      ref.current.rotation.y = state.clock.elapsedTime * 0.02;
-      ref.current.rotation.z = state.clock.elapsedTime * 0.01;
+      ref.current.rotation.y = state.elapsed * 0.02;
+      ref.current.rotation.z = state.elapsed * 0.01;
       
       const scroll = scrollYProgress.get();
       const scale = 1 + scroll * 0.2;
@@ -182,7 +185,7 @@ function PlanetOuter({ scrollYProgress }: { scrollYProgress: MotionValue<number>
 function OrbitRing() {
   const ref = useRef<THREE.Mesh>(null);
   useFrame((state) => {
-    if (ref.current) ref.current.rotation.z = state.clock.elapsedTime * 0.1;
+    if (ref.current) ref.current.rotation.z = state.elapsed * 0.1;
   });
   return (
     <group rotation={[Math.PI / 3, Math.PI / 6, 0]}>

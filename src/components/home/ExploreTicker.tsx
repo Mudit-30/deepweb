@@ -47,9 +47,10 @@ export function ExploreTicker() {
                   {item.description}
                 </p>
 
-                <button className="mt-auto flex items-center gap-2 font-bold group-hover/card:gap-3 transition-all relative z-10" style={{ color: "#52A9F0" }}>
-                  Learn More <ArrowRight className="w-4 h-4" />
-                </button>
+                <div className="mt-auto inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase opacity-50" style={{ color: item.color }}>
+                  <Zap className="w-3 h-3" />
+                  Technical Pillar
+                </div>
               </div>
             </div>
           ))}

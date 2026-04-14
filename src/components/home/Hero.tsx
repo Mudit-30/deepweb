@@ -2,7 +2,7 @@
 
 import { useRef, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Sparkles, Calendar, Terminal, Users, Zap, Shield, Rocket } from "lucide-react";
+import { Globe, Users } from "lucide-react";
 import gsap from "gsap";
 
 
@@ -84,15 +84,18 @@ export function Hero() {
             className="flex flex-col sm:flex-row items-center justify-end gap-6 pointer-events-auto w-full"
           >
             <a
-              href="#events"
+              href="#about"
               className="btn-primary group flex items-center gap-2"
             >
-              <Calendar className="w-5 h-5" />
-              Explore Events
+              <Globe className="w-5 h-5" />
+              Explore Station
             </a>
-            <a href="#hackathons" className="btn-outline flex items-center gap-2">
-              <Terminal className="w-5 h-5" style={{ color: "#38a9f8" }} />
-              View Hackathons
+            <a 
+              href="#join" 
+              className="btn-outline flex items-center gap-2 transition-all hover:bg-white/10"
+            >
+              <Users className="w-5 h-5 flex-shrink-0" style={{ color: "#38a9f8" }} />
+              <span className="whitespace-nowrap">Join Community</span>
             </a>
           </div>
         </div>

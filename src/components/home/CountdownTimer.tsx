@@ -16,26 +16,25 @@ export function CountdownTimer() {
   });
 
   useEffect(() => {
-    // Next Genesis Hackathon — set to 30 days from now as placeholder
-    const targetDate = new Date();
-    targetDate.setDate(targetDate.getDate() + 30);
-    const targetTime = targetDate.getTime();
+    // DeepStation MSRIT Next Event — set to June 30 2026
+    const targetTime = new Date("2026-06-30T18:00:00+05:30").getTime();
 
-    const timer = setInterval(() => {
-      const now = new Date().getTime();
-      const difference = targetTime - now;
-      if (difference <= 0) {
-        clearInterval(timer);
+    const tick = () => {
+      const now  = Date.now();
+      const diff = targetTime - now;
+      if (diff <= 0) {
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-      } else {
-        setTimeLeft({
-          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-          minutes: Math.floor((difference / 1000 / 60) % 60),
-          seconds: Math.floor((difference / 1000) % 60),
-        });
+        return;
       }
-    }, 1000);
+      setTimeLeft({
+        days:    Math.floor(diff / (1000 * 60 * 60 * 24)),
+        hours:   Math.floor((diff / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((diff / (1000 * 60)) % 60),
+        seconds: Math.floor((diff / 1000) % 60),
+      });
+    };
+    tick(); // immediate first tick avoids 1s blank flash
+    const timer = setInterval(tick, 1000);
     return () => clearInterval(timer);
   }, []);
 

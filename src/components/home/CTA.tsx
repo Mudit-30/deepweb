@@ -11,7 +11,7 @@ export function CTA() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section className="relative py-24 px-6 overflow-hidden bg-transparent">
+    <section id="join" className="relative py-24 px-6 overflow-hidden bg-transparent">
       {/* Grid dot pattern */}
       <div
         className="absolute inset-0 pointer-events-none opacity-[0.03]"
@@ -72,7 +72,7 @@ export function CTA() {
             {/* Right Column: Descriptions & Actions */}
             <div className="lg:w-[45%] w-full flex flex-col justify-center">
               <motion.p
-                className="text-slate-400 text-xl lg:text-2xl mb-10 max-w-xl leading-relaxed"
+                className="text-white text-xl lg:text-2xl mb-10 max-w-xl leading-relaxed font-medium"
                 initial={{ opacity: 0, y: 15 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
                 transition={{ delay: 0.4, duration: 0.7, ...SPRING }}
@@ -82,18 +82,35 @@ export function CTA() {
               </motion.p>
 
               <motion.div
-                className="flex flex-col sm:flex-row gap-4 justify-start"
+                className="flex flex-col sm:flex-row flex-wrap gap-6 justify-start"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
                 transition={{ delay: 0.55, duration: 0.6, ease: [0.34, 1.56, 0.64, 1] }}
               >
-                <a href="mailto:msrit@deepstation.ai" className="btn-primary group text-base py-4 px-8 w-fit" id="join">
-                  <Mail className="w-4 h-4" />
-                  Apply to Join
-                  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                <a 
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSdCCnxEaXhdrlBF413okiHch_0DbDmwmzaG11hdM46KgapgGg/viewform" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="group relative inline-flex items-center gap-3 bg-[#38a9f8] hover:bg-[#52A9F0] text-white text-lg px-10 py-5 rounded-full font-bold transition-all shadow-[0_0_20px_rgba(56,169,248,0.4)] hover:shadow-[0_0_40px_rgba(56,169,248,0.7)] active:scale-95 overflow-hidden"
+                >
+                  <span className="relative z-10 flex items-center gap-2">
+                    Apply as Volunteer
+                    <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-2" />
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
                 </a>
-                <a href="https://deepstation.ai/connect" target="_blank" rel="noopener" className="btn-outline text-base py-4 px-8 w-fit">
-                  Join Global Community →
+
+                <a 
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSdtFhE22FG7EMhEPWN0l3PWw8EiKSxaTTpRttpONatOQzKH5Q/viewform" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="group relative inline-flex items-center gap-3 bg-[#ef4444] hover:bg-[#ff5f5f] text-white text-lg px-10 py-5 rounded-full font-bold transition-all shadow-[0_0_20px_rgba(239,68,68,0.4)] hover:shadow-[0_0_40px_rgba(239,68,68,0.7)] active:scale-95 overflow-hidden"
+                >
+                  <span className="relative z-10 flex items-center gap-2">
+                    Apply as Sponsor
+                    <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-2" />
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
                 </a>
               </motion.div>
             </div>

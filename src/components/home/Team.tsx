@@ -64,13 +64,16 @@ function TeamCard({ member, index }: { member: typeof teamData[0]; index: number
       </p>
       <p className="text-slate-500 text-xs mb-4">{member.org}</p>
 
-      <button
-        className="flex items-center gap-1.5 text-xs font-bold text-slate-400 rounded-full px-3.5 py-1.5 transition-all duration-250 opacity-0 group-hover:opacity-100 glass hover:bg-white/10"
+      <a
+        href={`https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(member.name)}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center gap-1.5 text-xs font-bold text-slate-400 rounded-full px-3.5 py-1.5 transition-all duration-250 opacity-0 group-hover:opacity-100 glass hover:bg-white/10 hover:text-white"
         style={{ border: "1px solid rgba(24,134,202,0.3)" }}
       >
         <Link2 className="w-3 h-3" />
         Connect
-      </button>
+      </a>
     </motion.div>
   );
 }

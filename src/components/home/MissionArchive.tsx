@@ -64,7 +64,7 @@ export function MissionArchive() {
   };
 
   return (
-    <section className="min-h-screen flex flex-col justify-center px-6 relative overflow-hidden bg-transparent">
+    <section id="archive" className="min-h-screen flex flex-col justify-center px-6 relative overflow-hidden bg-transparent">
       <div className="max-w-7xl mx-auto relative z-10 w-full py-12">
         <div className="text-center mb-16">
           <motion.span

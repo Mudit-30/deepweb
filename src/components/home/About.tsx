@@ -2,30 +2,51 @@
 
 import { useRef, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
-import { Cpu, Globe, Calendar, ArrowRight } from "lucide-react";
+import { Cpu, Calendar, ArrowRight, BookOpen, Users, MessageCircle, HeartHandshake } from "lucide-react";
 import gsap from "gsap";
 
 const features = [
   {
     title: "Hackathons",
-    description: "Compete in high-stakes AI challenges and build real-world solutions with top developers across India.",
+    description: "Push your limits in our intense, high-stakes AI hackathons. Build real-world solutions alongside the top elite developers across the country.",
     icon: Cpu,
     color: "linear-gradient(to bottom right, #3b82f6, #22d3ee)",
-    id: "hackathons",
+    link: "https://deepstation.ai/hackathons",
   },
   {
-    title: "Expert Events",
-    description: "Learn from industry experts and AI researchers through interactive live sessions and deep dives.",
-    icon: Globe,
-    color: "linear-gradient(to bottom right, #a855f7, #818cf8)",
-    id: "workshops",
-  },
-  {
-    title: "Workshops",
-    description: "Hands-on technical training sessions focusing on the latest AI frameworks, tools, and best practices.",
+    title: "Events",
+    description: "Immerse yourself in our premier expert-led workshops and interactive technical deep-dives to master cutting-edge AI frameworks.",
     icon: Calendar,
-    color: "linear-gradient(to bottom right, #0e8ce4, #60a5fa)",
-    id: "events",
+    color: "linear-gradient(to bottom right, #a855f7, #818cf8)",
+    link: "https://luma.com/DeepStation",
+  },
+  {
+    title: "Community Directory",
+    description: "Network with over 4,000 global AI innovators, researchers, and engineers. Find your next co-founder or collaborator right here.",
+    icon: Users,
+    color: "linear-gradient(to bottom right, #f59e0b, #fcd34d)",
+    link: "https://deepstation.ai/community",
+  },
+  {
+    title: "Blogs",
+    description: "Read thought-provoking articles, tutorials, and research breakdowns directly from the minds pioneering the future of AI.",
+    icon: BookOpen,
+    color: "linear-gradient(to bottom right, #10b981, #34d399)",
+    link: "https://deepstation.ai/blog",
+  },
+  {
+    title: "Join India Chapter",
+    description: "Become part of the most exclusive autonomous AI tech community in the nation. Join our official WhatsApp group to stay connected.",
+    icon: MessageCircle,
+    color: "linear-gradient(to bottom right, #25D366, #128C7E)",
+    link: "https://chat.whatsapp.com/Dcx4t7hvCcdIDCOc9FeQAq",
+  },
+  {
+    title: "Apply as Volunteer/Sponsor",
+    description: "Drive the revolution. Apply to become a dedicated volunteer or bring your brand to the bleeding edge as an official event sponsor.",
+    icon: HeartHandshake,
+    color: "linear-gradient(to bottom right, #ef4444, #f87171)",
+    link: "#join",
   },
 ];
 
@@ -43,6 +64,7 @@ export function About() {
 
   // 3D tilt effect via GSAP
   useEffect(() => {
+    const cleanups: (() => void)[] = [];
     cardsRef.current.forEach((card) => {
       if (!card) return;
       const handleMouseMove = (e: MouseEvent) => {
@@ -58,11 +80,12 @@ export function About() {
       };
       card.addEventListener("mousemove", handleMouseMove);
       card.addEventListener("mouseleave", handleMouseLeave);
-      return () => {
+      cleanups.push(() => {
         card.removeEventListener("mousemove", handleMouseMove);
         card.removeEventListener("mouseleave", handleMouseLeave);
-      };
+      });
     });
+    return () => cleanups.forEach((fn) => fn());
   }, []);
 
   const titleRef    = useRef<HTMLDivElement>(null);
@@ -86,7 +109,7 @@ export function About() {
             >
               <span className="text-xs font-black" style={{ color: "#38a9f8" }}>DS</span>
             </div>
-            <span className="badge-orange">Origin Story</span>
+            <span className="badge-orange">Latest Updates</span>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
@@ -105,22 +128,32 @@ export function About() {
               </div>
             </div>
 
-            <div ref={bodyRef} className="space-y-5 pt-2 flex flex-col items-end text-right w-full lg:w-4/5 ml-auto">
-              {[
-                "Six months ago, DeepStation Founder & CEO Grant Kurz visited India to officially launch our expansion.",
-                "The vision: to bring the relentless energy of Silicon Valley's AI community directly to the brightest engineering students India has to offer.",
-                "DeepStation x MSRIT is the premier autonomous college chapter — the heartbeat of our India chapter at Ramaiah Institute of Technology.",
-              ].map((para, i) => (
-                <motion.p
-                  key={i}
-                  className="text-slate-400 text-base leading-relaxed max-w-sm"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={bodyInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                  transition={{ duration: 0.7, delay: i * 0.14, ease: [0.22, 1, 0.36, 1] }}
+            <div ref={bodyRef} className="space-y-6 pt-2 flex flex-col items-end text-right w-full lg:w-4/5 ml-auto">
+              <motion.p
+                className="text-slate-300 text-2xl md:text-3xl leading-relaxed max-w-sm font-semibold"
+                initial={{ opacity: 0, y: 20 }}
+                animate={bodyInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              >
+                Check out what's happening at the <span style={{ color: "#38a9f8" }}>Station</span>.
+              </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={bodyInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                className="mt-6 pt-4"
+              >
+                <a
+                  href="https://deepstation.ai/blog"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-3 bg-[#1886CA] hover:bg-[#52A9F0] active:scale-95 text-white text-lg px-10 py-5 rounded-full font-bold transition-all shadow-[0_0_30px_rgba(24,134,202,0.4)] hover:shadow-[0_0_40px_rgba(82,169,240,0.6)]"
                 >
-                  {para}
-                </motion.p>
-              ))}
+                  <BookOpen className="w-6 h-6" />
+                  View Our Blogs
+                </a>
+              </motion.div>
             </div>
           </div>
         </div>
@@ -180,15 +213,18 @@ export function About() {
                   <h3 className="text-2xl font-bold mb-4 text-white relative z-10" style={{ fontFamily: "var(--font-display)" }}>
                     {feature.title}
                   </h3>
-                  <p className="text-slate-400 mb-8 leading-relaxed relative z-10 flex-grow">
+                  <p className="text-slate-100 font-medium mb-8 leading-relaxed relative z-10 flex-grow text-[15px] drop-shadow-md">
                     {feature.description}
                   </p>
-                  <button
-                    className="flex items-center gap-2 font-bold group-hover/card:gap-3 transition-all relative z-10 mt-auto"
-                    style={{ color: "#38a9f8" }}
+                  <a
+                    href={feature.link}
+                    target={feature.link.startsWith("http") ? "_blank" : "_self"}
+                    rel={feature.link.startsWith("http") ? "noopener noreferrer" : ""}
+                    className="inline-flex items-center gap-2 font-bold group-hover/card:gap-3 transition-all relative z-10 mt-auto bg-white/20 hover:bg-white/30 backdrop-blur-sm px-6 py-3 rounded-full w-fit shadow-lg shadow-black/20"
+                    style={{ color: "#fff" }}
                   >
-                    Learn More <ArrowRight className="w-4 h-4" />
-                  </button>
+                    Learn More <ArrowRight className="w-5 h-5" />
+                  </a>
                 </div>
               </motion.div>
             ))}
